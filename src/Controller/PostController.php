@@ -3,21 +3,27 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/post/{id}', name: 'app_post')]
-    public function index(Post $post): Response
+    private $em;
+    public function __construct(EntityManagerInterface $em)
     {
-            return $this->render('post/index.html.twig', [
-            'controller_name' => 'PostController',
-            'myvar' => 'Mi string to past',
-            'newarray' => [0,1,2,2],
-            'post' => $post
-        ]
-    );
+        $this->em = $em;
+    }
+    #[Route('/post/{id}', name: 'app_post')]
+    public function index($id): Response
+    {
+        $post = $this->em->getRepository(Post::class)->find($id);
+        return $this->render(
+            'post/index.html.twig',
+            [
+                "post" => $post
+            ]
+        );
     }
 }
