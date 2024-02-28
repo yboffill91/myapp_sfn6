@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!
+{% block title %}Hello UserController!
 {% endblock %}
 
 {% block body %}
@@ -18,9 +18,8 @@
 	</style>
 
 	<div class="example-wrapper">
-		
-{{ form (createPostForm)}}
-	{# ------------------ #}
+		{{form(userCreate) }}
+			{# -- ** -- #}
+		</div>
+	{% endblock %}
 
-
-{% endblock %}

@@ -14,6 +14,12 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            form_login:
+                # Login route...
+                login_path: login
+                check_path: login
+            logout:
+                path:  logout
             lazy: true
             provider: app_user_provider
 

@@ -13,6 +13,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+ 
+
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -42,10 +45,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Interaction::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $interactions;
 
-    public function __construct()
+    public function __construct($email = null, $password = null, $photo = null, $description = null)
     {
         $this->posts = new ArrayCollection();
         $this->interactions = new ArrayCollection();
+        $this->email = $email;
+        $this->password = $password;
+        $this->photo = $photo;
+        $this->description = $description;
     }
 
     public function getId(): ?int
